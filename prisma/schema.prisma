@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model biographie {
+  id     Int    @id @default(autoincrement())
+  nom    String @db.VarChar(255)
+  status String @db.VarChar(255)
+  texte  String
+}
+
+model croyance {
+  id          Int    @id @default(autoincrement())
+  nom         String @db.VarChar(255)
+  arabe       String
+  francais    String
+  type_id     Int
+  sujet       String
+  phonetique  String
+  explication String
+  audio       String
+  type        type   @relation(fields: [type_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model douaa {
+  id             Int    @id @default(autoincrement())
+  sujet          String @db.VarChar(255)
+  texte_arabe    String
+  texte_francais String
+  phonetique     String
+  explication    String
+  type_id        Int?
+  commentaire    String
+  type           type?  @relation(fields: [type_id], references: [id], onUpdate: NoAction)
+}
+
+model hadith {
+  id             Int    @id @default(autoincrement())
+  sujet          String @db.VarChar(255)
+  raporteur      String @db.VarChar(255)
+  narrateur      String @db.VarChar(255)
+  statut         String @db.VarChar(255)
+  texte_arabe    String
+  texte_francais String
+  phonetique     String
+  explication    String
+  type_id        Int
+  type           type   @relation(fields: [type_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model parole {
+  id             Int    @id @default(autoincrement())
+  texte_arabe    String
+  texte_francais String
+  phonetique     String
+  explication    String
+  type_id        Int?
+  type           type?  @relation(fields: [type_id], references: [id], onUpdate: NoAction)
+}
+
+model type {
+  id       Int        @id @default(autoincrement())
+  nom      String     @db.VarChar(255)
+  croyance croyance[]
+  dhikr    dhikr[]
+  douaa    douaa[]
+  hadith   hadith[]
+  parole   parole[]
+}
+
+model dhikr {
+  id             Int    @id(map: "invocation_pkey") @default(autoincrement())
+  sujet          String @db.VarChar(255)
+  texte_arabe    String
+  texte_francais String
+  phonetique     String
+  explication    String
+  type_id        Int?
+  commentaire    String
+  type           type?  @relation(fields: [type_id], references: [id], onUpdate: NoAction, map: "invocation_type_id_fkey")
+}

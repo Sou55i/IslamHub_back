@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="ddeb97b8-1f1a-43d7-82e9-20746451df46" name="islamhub@localhost Mapping">
+      <data-sources db="e0f4eec7-4936-47a6-9217-9d51b3611fb3" />
+      <scope>
+        <node kind="database" qname="islamhub">
+          <node kind="schema" negative="1" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>
