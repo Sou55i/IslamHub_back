@@ -81,7 +81,7 @@ VALUES
 INSERT INTO "hadith" (
     "id",
     "sujet",
-    "raporteur",
+    "rapporteur",
     "narrateur",
     "statut",
     "texte_arabe",

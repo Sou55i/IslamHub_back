@@ -36,7 +36,7 @@ const dhikrController = {
             const createdHadith = await db.hadith.create(hadith);
             response.status(201).json(createdHadith);
         } catch (error) {
-            error.type = "database";
+            error.tag = "database";
             error.method = request.method;
             error.message = "Error in creating hadith";
             return next(error);
@@ -49,7 +49,7 @@ const dhikrController = {
             const updatedHadith = await db.hadith.update(id, hadith);
             response.json(updatedHadith);
         } catch (error) {
-            error.type = "database";
+            error.tag = "database";
             error.method = request.method;
             error.message = "Error in updating hadith";
             return next(error);

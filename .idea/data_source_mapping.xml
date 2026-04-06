@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/prisma/data/coran/insert.coran.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/createDb.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/dhikr/insert.Dhikr.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/douaa/insert.Douaa.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/hadith/insert.Hadith.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/parole/insert.Parole.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/seeding.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+    <file url="file://$PROJECT_DIR$/prisma/data/tag/insert.tag.sql" value="904b7900-69a7-4646-b0ba-0eaa5c46cbb4" />
+  </component>
+</project>
