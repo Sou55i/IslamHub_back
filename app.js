@@ -11,13 +11,13 @@ import error404 from "./app/middlewares/error.404.js";
 
 const app = express();
 
-// Trust first proxy (nginx, etc.) so rate-limiter uses real client IP
+// Trust first proxy (Render, nginx, etc.) so rate-limiter uses real client IP
 app.set('trust proxy', 1);
 
 app.use(helmet());
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',')
+  ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
   : ['http://localhost:5173', 'http://localhost:3000'];
 
 app.use(cors({
@@ -38,14 +38,20 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.static("public"));
 
-if (process.env.NODE_ENV !== 'production') {
-  app.use(logger("dev"));
+// Logs : en production (Render), stdout est capturé automatiquement.
+// En local uniquement, on écrit aussi dans logs/access.log (dossier gitignoré,
+// donc absent sur Render — il faut le créer avant d'y écrire).
+if (process.env.NODE_ENV === 'production') {
+  app.use(logger('combined'));
+} else {
+  app.use(logger('dev'));
+  fs.mkdirSync('./logs', { recursive: true });
+  app.use(
+    logger('common', {
+      stream: fs.createWriteStream('./logs/access.log', { flags: 'a' }),
+    })
+  );
 }
-app.use(
-  logger("common", {
-    stream: fs.createWriteStream("./logs/access.log", { flags: "a" }),
-  })
-);
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
