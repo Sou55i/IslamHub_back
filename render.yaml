@@ -1,0 +1,23 @@
+# Render Blueprint — API IslamHub (Node.js + Express + PostgreSQL/Supabase)
+# Docs : https://render.com/docs/blueprint-spec
+#
+# Pour déployer : Render Dashboard → New → Blueprint → sélectionne ce repo.
+# Les variables marquées `sync: false` sont à renseigner dans le dashboard
+# (elles ne sont PAS commitées ici, ce sont des secrets).
+services:
+  - type: web
+    name: islamhub-api
+    runtime: node
+    plan: free
+    region: frankfurt          # proche Europe / Supabase eu-central
+    branch: main               # ⚠️ assure-toi que `main` contient le code à jour
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false            # chaîne de connexion Supabase (Session pooler)
+      - key: ALLOWED_ORIGINS
+        sync: false            # URL(s) du front, séparées par des virgules
